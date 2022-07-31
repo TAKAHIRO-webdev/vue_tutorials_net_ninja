@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1 v-on:click="changeTitle">{{ title }}</h1>
+    <h1>{{ title }}</h1>
   </header>
 </template>
 
@@ -11,7 +11,7 @@ export default {
       title: {
         type: String
       }
-    },
+    }, 
     data() {
         return {
         };
