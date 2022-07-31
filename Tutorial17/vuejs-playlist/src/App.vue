@@ -1,22 +1,22 @@
 <template>
   <div>
     <h1>{{ title }}</h1>
-    <p>{{ greeting() }}</p>
+    <NinjaUsers></NinjaUsers>
   </div>
 </template>
 
 <script>
+import NinjaUsers from "./NinjaUsers.vue";
+
 export default {
-  data() {
-    return {
-      title: "Your first Vue file!",
-    };
-  },
-  methods: {
-    greeting: function () {
-      return "hi!";
+    components: {
+      'NinjaUsers': NinjaUsers
     },
-  },
+    data() {
+        return {
+            title: "Ninja apps",
+        };
+    },
 };
 </script>
 
