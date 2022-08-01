@@ -1,10 +1,10 @@
 <template>
-  <div v-theme:column="wide" id="show-blogs">
+  <div id="show-blogs">
    <h1>All Blog Articles</h1> 
    <input type="text" v-model="search" placeholder="search blogs"/>
    <div v-for="(blog, key) in filteredBlogs" :key="key" class="single-blog">
-    <router-link v-bind:to="'/blog/' + blog.id"></router-link> <h2>{{ blog.title | to-uppercase }}</h2>
-     <article>{{ blog.body | snippet }}</article>
+    <router-link v-bind:to="'/blog/' + blog.id"><h2>{{ blog.title | to-uppercase }}</h2></router-link> 
+     <article>{{ blog.content | snippet }}</article>
    </div>
   </div>
 </template>
@@ -30,8 +30,15 @@ export default {
 
     },
     created(){
-      this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data){
-        this.blog = data.body.slice(0,10);
+      this.$http.get('https://taka-vue-ninja-20220801-default-rtdb.firebaseio.com/posts.json').then(function(data){
+        return data.json();
+      }).then(function(data){
+        var blogsArray = [];
+        for (let key in data){
+          data[key].id = key
+          blogsArray.push(data[key]);
+        }
+        this.blogs = blogsArray;
       });
     },
     computed: {
